@@ -1,16 +1,30 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import React from "react";
+import { useAuth } from "./auth/useAuth";
 
-function App() {
-  const [count, setCount] = useState(0);
+const App = () => {
+  const { user, login, logout } = useAuth();
 
   return (
-    <>
-      <h1>LMS-Project</h1>
-    </>
+    <div>
+      <h1>Welcome to LMS Project</h1>
+      {user ? (
+        <>
+          <p>Hello, {user.name}</p>
+          <button onClick={logout}>Logout</button>
+        </>
+      ) : (
+        <>
+          <button
+            onClick={() =>
+              login({ name: "Demo User", email: "demo@example.com" })
+            }
+          >
+            Login
+          </button>
+        </>
+      )}
+    </div>
   );
-}
+};
 
 export default App;
