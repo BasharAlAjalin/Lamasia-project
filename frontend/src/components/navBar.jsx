@@ -1,29 +1,65 @@
+import React from "react";
 import { Link } from "react-router-dom";
-import useAuth from "../auth/useAuth";
+import { useAuth } from "../auth/authContext";
 
-export default function Navbar() {
+const NavBar = () => {
   const { user, logout } = useAuth();
 
   return (
-    <nav className="flex justify-between p-4 bg-gray-900 text-white">
-      <Link to="/" className="font-bold text-lg">
-        LMS
-      </Link>
-      <div className="space-x-4">
-        <Link to="/courses">Courses</Link>
-        <Link to="/quizzes">Quizzes</Link>
-        {user ? (
-          <>
-            <Link to="/profile">Profile</Link>
-            <button onClick={logout}>Logout</button>
-          </>
-        ) : (
-          <>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
-          </>
-        )}
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container">
+        <Link to="/" className="navbar-brand">
+          La Masia
+        </Link>
+        <div className="collapse navbar-collapse">
+          <ul className="navbar-nav me-auto">
+            <li className="nav-item">
+              <Link to="/" className="nav-link">
+                Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/courses" className="nav-link">
+                Courses
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/quizzes" className="nav-link">
+                Quizzes
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/profile" className="nav-link">
+                Profile
+              </Link>
+            </li>
+          </ul>
+          <ul className="navbar-nav">
+            {user ? (
+              <li className="nav-item">
+                <button onClick={logout} className="btn btn-danger">
+                  Logout
+                </button>
+              </li>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link to="/login" className="btn btn-primary me-2">
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/signup" className="btn btn-success">
+                    Sign Up
+                  </Link>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
       </div>
     </nav>
   );
-}
+};
+
+export default NavBar;

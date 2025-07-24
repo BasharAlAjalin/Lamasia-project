@@ -1,15 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import AuthenticationProvider from "./auth/authentication";
-import "./index.css";
+import { AuthProvider } from "./auth/authContext";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthenticationProvider>
+    <AuthProvider>
       <App />
-    </AuthenticationProvider>
+    </AuthProvider>
   </React.StrictMode>
 );

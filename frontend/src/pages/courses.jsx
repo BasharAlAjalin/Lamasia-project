@@ -1,24 +1,16 @@
-import { useEffect, useState } from "react";
-import API from "../api/api";
+import React from "react";
 
-export default function Courses() {
-  const [courses, setCourses] = useState([]);
-
-  useEffect(() => {
-    API.get("/courses").then((res) => setCourses(res.data));
-  }, []);
-
+const Courses = () => {
   return (
-    <div className="p-6">
-      <h2 className="text-2xl mb-4">Courses</h2>
-      <ul className="space-y-2">
-        {courses.map((course) => (
-          <li key={course.id} className="p-4 border rounded shadow">
-            <h3 className="text-lg font-semibold">{course.title}</h3>
-            <p>{course.description}</p>
-          </li>
-        ))}
+    <div>
+      <h1 className="mb-4">Courses</h1>
+      <ul className="list-group">
+        <li className="list-group-item">Course 1</li>
+        <li className="list-group-item">Course 2</li>
+        <li className="list-group-item">Course 3</li>
       </ul>
     </div>
   );
-}
+};
+
+export default Courses;
