@@ -15,14 +15,13 @@ function Home() {
         MozOsxFontSmoothing: "grayscale",
       }}
     >
-      {/* Softer, lighter overlay for subtle effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-purple-100/20 to-blue-100/20 z-0" />
       <div className="max-w-md w-full space-y-8 relative z-10">
         <div className="text-center">
           <div className="mx-auto w-16 h-16 bg-gradient-to-br from-purple-400 to-blue-500 rounded-xl flex items-center justify-center mb-4 shadow-lg">
             <span className="text-white font-bold text-xl">LM</span>
           </div>
-          <h1 className="text-3xl font-bold text-gray-300 mb-2 drop-shadow-lg">
+          <h1 className="text-4xl font-bold text-gray-300 mb-2 drop-shadow-lg">
             Welcome to La Masia School
           </h1>
           <p className="text-white mb-6 drop-shadow text-2xl ">

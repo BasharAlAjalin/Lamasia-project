@@ -40,12 +40,12 @@ function NavBar() {
             >
               Quizzes
             </Link>
-            <Link
+            {/* <Link
               to="/profile"
               className="text-white no-underline hover:no-underline hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-all duration-200 font-medium"
             >
               Profile
-            </Link>
+            </Link> */}
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
@@ -68,7 +68,7 @@ function NavBar() {
               <>
                 <Link
                   to="/login"
-                  className="text-white bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 hover:text-white border border-purple-500/50 hover:bg-purple-500/20 px-4 py-2 rounded-lg transition-all duration-200 font-medium"
+                  className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white px-4 py-2 rounded-lg transition-all duration-200 font-medium shadow-lg hover:shadow-purple-500/25"
                 >
                   Login
                 </Link>
