@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { fetchCourses } from "../api/api";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 function Courses() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetchCourses().then(setCourses);
+    axios.get("http://localhost:8080/api/courses").then((res) => {
+      setCourses(res.data);
+    });
   }, []);
 
   return (
@@ -14,11 +17,12 @@ function Courses() {
       <ul className="list-group">
         {courses.map((course) => (
           <li key={course.id} className="list-group-item">
-            {course.name}
+            <Link to={`/courses/${course.id}`}>{course.title}</Link>
           </li>
         ))}
       </ul>
     </div>
   );
 }
+
 export default Courses;

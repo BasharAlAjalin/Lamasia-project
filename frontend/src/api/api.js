@@ -23,3 +23,11 @@ export async function submitQuiz(submissionData) {
   });
   return res.json();
 }
+
+export async function fetchCourseDetails(courseId) {
+  const res = await fetch(`${API_BASE}/courses/${courseId}`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch course details");
+  }
+  return res.json();
+}
