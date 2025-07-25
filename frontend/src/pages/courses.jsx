@@ -1,16 +1,24 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { fetchCourses } from "../api/api";
 
-const Courses = () => {
+function Courses() {
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    fetchCourses().then(setCourses);
+  }, []);
+
   return (
-    <div>
-      <h1 className="mb-4">Courses</h1>
+    <div className="container mt-4">
+      <h2>Courses</h2>
       <ul className="list-group">
-        <li className="list-group-item">Course 1</li>
-        <li className="list-group-item">Course 2</li>
-        <li className="list-group-item">Course 3</li>
+        {courses.map((course) => (
+          <li key={course.id} className="list-group-item">
+            {course.name}
+          </li>
+        ))}
       </ul>
     </div>
   );
-};
-
+}
 export default Courses;

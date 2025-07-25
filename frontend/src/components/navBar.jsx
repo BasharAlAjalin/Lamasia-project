@@ -2,17 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../auth/authContext";
 
-const NavBar = () => {
+function NavBar() {
   const { user, logout } = useAuth();
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="container">
+    <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
+      <div className="container-fluid">
         <Link to="/" className="navbar-brand">
           La Masia
         </Link>
         <div className="collapse navbar-collapse">
-          <ul className="navbar-nav me-auto">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link to="/" className="nav-link">
                 Home
@@ -34,32 +34,29 @@ const NavBar = () => {
               </Link>
             </li>
           </ul>
-          <ul className="navbar-nav">
+          <div className="d-flex">
             {user ? (
-              <li className="nav-item">
-                <button onClick={logout} className="btn btn-danger">
+              <>
+                <span className="navbar-text me-2">Hello, {user.name}</span>
+                <button onClick={logout} className="btn btn-outline-light">
                   Logout
                 </button>
-              </li>
+              </>
             ) : (
               <>
-                <li className="nav-item">
-                  <Link to="/login" className="btn btn-primary me-2">
-                    Login
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/signup" className="btn btn-success">
-                    Sign Up
-                  </Link>
-                </li>
+                <Link to="/login" className="btn btn-primary me-2">
+                  Login
+                </Link>
+                <Link to="/signup" className="btn btn-success">
+                  Sign Up
+                </Link>
               </>
             )}
-          </ul>
+          </div>
         </div>
       </div>
     </nav>
   );
-};
+}
 
 export default NavBar;

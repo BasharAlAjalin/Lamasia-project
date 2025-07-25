@@ -1,9 +1,9 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
-export default function Home() {
+function Home() {
   return (
-    <div className="container py-5 text-center">
-      <h1 className="display-3 fw-bold mb-3 text-primary">
+    <div className="container text-center mt-5">
+      <h1 className="display-4 text-primary fw-bold">
         Welcome to La Masia School
       </h1>
       <p className="lead text-muted">
@@ -11,13 +11,15 @@ export default function Home() {
         Built with React and Spring Boot.
       </p>
       <div className="mt-4">
-        <a href="/courses" className="btn btn-primary btn-lg me-3">
+        <Link to="/courses" className="btn btn-primary me-3">
           Browse Courses
-        </a>
-        <a href="/quizzes" className="btn btn-outline-secondary btn-lg">
+        </Link>
+        <Link to="/quizzes" className="btn btn-outline-secondary">
           Take a Quiz
-        </a>
+        </Link>
       </div>
     </div>
   );
 }
+
+export default Home;
