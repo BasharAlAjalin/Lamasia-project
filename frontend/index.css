@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+a,
+a:visited,
+a:hover,
+a:active,
+[class*="Link"],
+[class*="Link"]:visited,
+[class*="Link"]:hover,
+[class*="Link"]:active {
+  text-decoration: none !important;
+}
