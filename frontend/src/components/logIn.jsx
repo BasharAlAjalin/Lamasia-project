@@ -18,7 +18,6 @@ export default function LogIn() {
       ...prev,
       [name]: value,
     }));
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors((prev) => ({
         ...prev,
@@ -56,11 +55,20 @@ export default function LogIn() {
 
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      login({ name: formData.email.split("@")[0], email: formData.email });
+      const response = await fetch("http://localhost:8080/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Invalid email or password");
+      }
+
+      const data = await response.json();
+      login(data); // token, name, email, role
       navigate("/");
-    } catch (error) {
+    } catch {
       setErrors({ general: "Login failed. Please try again." });
     } finally {
       setIsLoading(false);
@@ -68,7 +76,7 @@ export default function LogIn() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center  px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <div className="mx-auto w-16 h-16 bg-gray-800 rounded-xl flex items-center justify-center mb-4">

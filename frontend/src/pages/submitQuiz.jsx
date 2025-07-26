@@ -16,15 +16,14 @@ function SubmitQuiz() {
   };
 
   const handleSubmit = async () => {
-    const submissionData = { quizId, answers };
-    try {
-      await submitQuiz(submissionData);
-      alert("Quiz submitted successfully!");
-    } catch {
-      alert("Failed to submit quiz.");
-    }
-  };
-
+  const submissionData = { quizId, answers };
+  try {
+    const result = await submitQuiz(submissionData); 
+    alert(`Quiz submitted successfully! Your score: ${result.score}/${questions.length}`);
+  } catch {
+    alert("Failed to submit quiz.");
+  }
+};
   return (
     <div className="container mt-4">
       <h2>Submit Quiz</h2>
