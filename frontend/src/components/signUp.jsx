@@ -79,14 +79,26 @@ export default function SignUp() {
       });
 
       if (!response.ok) {
-        throw new Error("Registration failed");
+        const errorData = await response.text();
+        console.error("Registration failed:", response.status, errorData);
+        
+        if (response.status === 409) {
+          setErrors({ general: "Email already exists. Please use a different email." });
+        } else if (response.status === 400) {
+          setErrors({ general: "Invalid data provided. Please check your inputs." });
+        } else {
+          setErrors({ general: `Registration failed (${response.status}). Please try again.` });
+        }
+        return;
       }
 
       const data = await response.json();
+      console.log("Registration successful:", data);
       login(data);
       navigate("/");
     } catch (error) {
-      setErrors({ general: "Sign up failed. Please try again." });
+      console.error("Signup error:", error);
+      setErrors({ general: "Network error. Please check if the server is running." });
     } finally {
       setIsLoading(false);
     }

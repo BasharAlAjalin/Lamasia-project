@@ -44,21 +44,25 @@ function NavBar() {
             >
               Quizzes
             </Link>
+            
+            {/* Profile link for all logged-in users */}
+            {user && (
+              <Link
+                to="/profile"
+                className="text-white no-underline hover:no-underline hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-all duration-200 font-medium"
+              >
+                Profile
+              </Link>
+            )}
+            
+            {/* Role-specific links */}
             {isUser && (
-              <>
-                <Link
-                  to="/my-enrollments"
-                  className="text-white no-underline hover:no-underline hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-all duration-200 font-medium"
-                >
-                  My Enrollments
-                </Link>
-                <Link
-                  to="/profile"
-                  className="text-white no-underline hover:no-underline hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-all duration-200 font-medium"
-                >
-                  Profile
-                </Link>
-              </>
+              <Link
+                to="/my-enrollments"
+                className="text-white no-underline hover:no-underline hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-all duration-200 font-medium"
+              >
+                My Enrollments
+              </Link>
             )}
             {isAdmin && (
               <Link
@@ -167,21 +171,25 @@ function NavBar() {
               >
                 Quizzes
               </Link>
+              
+              {/* Profile link for all logged-in users */}
+              {user && (
+                <Link
+                  to="/profile"
+                  className="text-gray-300 no-underline hover:no-underline hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-all duration-200"
+                >
+                  Profile
+                </Link>
+              )}
+              
+              {/* Role-specific links */}
               {isUser && (
-                <>
-                  <Link
-                    to="/my-enrollments"
-                    className="text-gray-300 no-underline hover:no-underline hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-all duration-200"
-                  >
-                    My Enrollments
-                  </Link>
-                  <Link
-                    to="/profile"
-                    className="text-gray-300 no-underline hover:no-underline hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-all duration-200"
-                  >
-                    Profile
-                  </Link>
-                </>
+                <Link
+                  to="/my-enrollments"
+                  className="text-gray-300 no-underline hover:no-underline hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-all duration-200"
+                >
+                  My Enrollments
+                </Link>
               )}
               {isAdmin && (
                 <Link
