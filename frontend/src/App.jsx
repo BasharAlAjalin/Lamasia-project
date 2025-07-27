@@ -3,14 +3,11 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import Courses from "./pages/courses";
 import Quizzes from "./pages/quizzes";
-import SubmitQuiz from "./pages/submitQuiz";
 import Profile from "./pages/profile";
 import AdminPanel from "./pages/AdminPanel";
-import AdminDashboard from "./pages/AdminDashboard";
 import UserDashboard from "./pages/UserDashboard";
 import Unauthorized from "./pages/Unauthorized";
 import UploadContent from "./pages/UploadContent";
-import CourseDetails from "./pages/CourseDetails";
 import MyEnrollments from "./pages/MyEnrollments";
 import InstructorCourseQuizzes from "./pages/InstructorCourseQuizzes";
 import ManageQuestions from "./pages/ManageQuestions";
@@ -50,14 +47,6 @@ function App() {
           }
         />
         <Route
-          path="/courses/:courseId"
-          element={
-            <PrivateRoute allowedRoles={["USER", "ADMIN", "INSTRUCTOR"]}>
-              <CourseDetails />
-            </PrivateRoute>
-          }
-        />
-        <Route
           path="/quizzes"
           element={
             <PrivateRoute allowedRoles={["USER", "ADMIN", "INSTRUCTOR"]}>
@@ -67,14 +56,6 @@ function App() {
         />
 
         {/* USER-only */}
-        <Route
-          path="/submit-quiz"
-          element={
-            <PrivateRoute allowedRoles={["USER"]}>
-              <SubmitQuiz />
-            </PrivateRoute>
-          }
-        />
         <Route
           path="/take-quiz/:quizId"
           element={
@@ -106,14 +87,6 @@ function App() {
           element={
             <PrivateRoute allowedRoles={["ADMIN"]}>
               <AdminPanel />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/admin-dashboard"
-          element={
-            <PrivateRoute allowedRoles={["ADMIN"]}>
-              <AdminDashboard />
             </PrivateRoute>
           }
         />

@@ -8,6 +8,7 @@ function NavBar() {
 
   const isAdmin = user?.role === "ADMIN";
   const isUser = user?.role === "USER";
+  const isInstructor = user?.role === "INSTRUCTOR";
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 shadow-lg border-b border-purple-500/20">
@@ -65,6 +66,14 @@ function NavBar() {
                 className="text-white no-underline hover:no-underline hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-all duration-200 font-medium"
               >
                 Admin Panel
+              </Link>
+            )}
+            {isInstructor && (
+              <Link
+                to="/upload-content"
+                className="text-white no-underline hover:no-underline hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-all duration-200 font-medium"
+              >
+                Upload Content
               </Link>
             )}
           </div>
@@ -180,6 +189,14 @@ function NavBar() {
                   className="text-gray-300 no-underline hover:no-underline hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-all duration-200"
                 >
                   Admin Panel
+                </Link>
+              )}
+              {isInstructor && (
+                <Link
+                  to="/upload-content"
+                  className="text-gray-300 no-underline hover:no-underline hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-all duration-200"
+                >
+                  Upload Content
                 </Link>
               )}
               <div className="pt-4 border-t border-purple-500/20 mt-4">

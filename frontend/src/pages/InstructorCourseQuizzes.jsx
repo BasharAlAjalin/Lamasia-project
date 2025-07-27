@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchQuizzesByCourse, addQuizToCourse } from "../api/quizApi";
+import { fetchQuizzesByCourse, addQuizToCourse } from "../api/api";
 
 function InstructorCourseQuizzes() {
   const { courseId } = useParams();

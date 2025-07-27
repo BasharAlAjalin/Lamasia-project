@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getMyEnrollments } from "../api/enrollmentApi";
+import { getMyEnrollments } from "../api/api";
 import { useAuth } from "../auth/authContext";
 
 function MyEnrollments() {

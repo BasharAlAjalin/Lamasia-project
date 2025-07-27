@@ -19,7 +19,7 @@ function Quizzes() {
             className="list-group-item d-flex justify-content-between align-items-center"
           >
             {quiz.title}
-            <Link to={`/submit/${quiz.id}`} className="btn btn-sm btn-primary">
+            <Link to={`/take-quiz/${quiz.id}`} className="btn btn-sm btn-primary">
               Take Quiz
             </Link>
           </li>

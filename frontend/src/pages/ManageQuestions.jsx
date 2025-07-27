@@ -4,7 +4,7 @@ import {
   fetchQuestionsByQuiz,
   addQuestionToQuiz,
   deleteQuestion,
-} from "../api/questionApi";
+} from "../api/api";
 
 function ManageQuestions() {
   const { quizId } = useParams();
