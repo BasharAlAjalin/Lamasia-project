@@ -2,9 +2,9 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../auth/authContext";
 
 const PrivateRoute = ({ children, allowedRoles }) => {
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
 
-  if (!user) {
+  if (!isAuthenticated()) {
     return <Navigate to="/login" />;
   }
 

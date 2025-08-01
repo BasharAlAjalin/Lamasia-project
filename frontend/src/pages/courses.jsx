@@ -40,7 +40,51 @@ function Courses() {
       });
   };
 
+  const handleEnroll = async (courseId) => {
+    if (!user) {
+      alert('Please log in to enroll in courses');
+      return;
+    }
 
+    try {
+      // Get auth token from localStorage
+      const token = localStorage.getItem('token');
+      const headers = {
+        'Content-Type': 'application/json'
+      };
+      
+      // Add authorization header if token exists
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      }
+
+      const response = await axios.post(
+        'http://localhost:8080/api/enrollments/enroll',
+        null,
+        {
+          params: {
+            studentId: user.id,
+            courseId: courseId
+          },
+          headers: headers,
+          withCredentials: true
+        }
+      );
+      
+      if (response.status === 200) {
+        alert('Successfully enrolled in the course!');
+      }
+    } catch (error) {
+      if (error.response?.status === 400) {
+        alert('You are already enrolled in this course or enrollment failed.');
+      } else if (error.response?.status === 403) {
+        alert('Authentication required. Please log in again.');
+      } else {
+        console.error('Enrollment error:', error);
+        alert('Failed to enroll. Please try again.');
+      }
+    }
+  };
 
   const backToCourses = () => {
     setSelectedCourse(null);

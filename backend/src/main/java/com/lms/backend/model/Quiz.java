@@ -1,18 +1,17 @@
 package com.lms.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "courses")
+@Table(name = "quizzes")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Course {
+public class Quiz {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,15 +23,24 @@ public class Course {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "instructor_name")
-    private String instructorName;
-
-    private String category;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id", nullable = false)
+    @ToString.Exclude
+    private Course course;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "instructor_id")
+    @JoinColumn(name = "instructor_id", nullable = false)
     @ToString.Exclude
     private User instructor;
+
+    @Column(name = "time_limit")
+    private Integer timeLimit; // in minutes
+
+    @Column(name = "max_attempts")
+    private Integer maxAttempts = 1;
+
+    @Column(name = "is_active")
+    private Boolean isActive = true;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -40,18 +48,18 @@ public class Course {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
-    @JsonManagedReference
-    private List<CourseContent> contents;
+    private List<Question> questions;
+
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<QuizSubmission> submissions;
 
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
-        if (instructor != null && instructorName == null) {
-            instructorName = instructor.getName();
-        }
     }
 
     @PreUpdate

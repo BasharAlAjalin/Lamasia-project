@@ -1,5 +1,6 @@
 package com.lms.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ public class CourseContent {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id", nullable = false)
     @ToString.Exclude
+    @JsonBackReference
     private Course course;
 
     @Column(nullable = false)

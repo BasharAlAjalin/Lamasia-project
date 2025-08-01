@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../auth/authContext";
 
 export default function SignUp() {
-  const { login } = useAuth();
+  const { register, loading, error } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -12,7 +12,6 @@ export default function SignUp() {
     confirmPassword: ""
   });
   const [errors, setErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,42 +64,11 @@ export default function SignUp() {
       return;
     }
     
-    setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:8080/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-          role: "USER"
-        }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.text();
-        console.error("Registration failed:", response.status, errorData);
-        
-        if (response.status === 409) {
-          setErrors({ general: "Email already exists. Please use a different email." });
-        } else if (response.status === 400) {
-          setErrors({ general: "Invalid data provided. Please check your inputs." });
-        } else {
-          setErrors({ general: `Registration failed (${response.status}). Please try again.` });
-        }
-        return;
-      }
-
-      const data = await response.json();
-      console.log("Registration successful:", data);
-      login(data);
+      await register(formData.name, formData.email, formData.password);
       navigate("/");
-    } catch (error) {
-      console.error("Signup error:", error);
-      setErrors({ general: "Network error. Please check if the server is running." });
-    } finally {
-      setIsLoading(false);
+    } catch (err) {
+      setErrors({ general: err.message || "Registration failed. Please try again." });
     }
   };
 
@@ -120,9 +88,9 @@ export default function SignUp() {
         </div>
         
         <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-lg">
-          {errors.general && (
+          {(errors.general || error) && (
             <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-300 text-sm">
-              {errors.general}
+              {errors.general || error}
             </div>
           )}
           
@@ -211,10 +179,10 @@ export default function SignUp() {
             
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={loading}
               className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm"
             >
-              {isLoading ? (
+              {loading ? (
                 <div className="flex items-center">
                   <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

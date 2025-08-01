@@ -19,7 +19,9 @@ const Profile = () => {
         // Fetch data based on user role
         if (user.role === "USER") {
           // Fetch enrolled courses for students
+          console.log('Fetching enrollments for user ID:', user.id);
           const enrollments = await getMyEnrollments(user.id);
+          console.log('Received enrollments:', enrollments);
           setEnrolledCourses(enrollments);
           
           // Fetch quiz submissions

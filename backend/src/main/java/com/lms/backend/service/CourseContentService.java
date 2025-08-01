@@ -23,7 +23,8 @@ public class CourseContentService {
         CourseContent content = new CourseContent();
         content.setTitle(title);
         content.setType(CourseContent.ContentType.valueOf(type));
-        content.setUrl(url);
+        content.setFileUrl(url); // Set fileUrl as the primary field
+        content.setUrl(url);     // Keep url for backward compatibility
         content.setCourse(course);
         return contentRepository.save(content);
     }
